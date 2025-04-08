@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: ./server
+    container_name: ship-proxy-server
+    ports:
+      - "9090:9090"
+
+  client:
+    build:
+      context: ./client
+    container_name: ship-proxy-client
+    ports:
+      - "8080:8080"
+    depends_on:
+      - server

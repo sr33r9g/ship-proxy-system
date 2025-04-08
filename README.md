@@ -38,17 +38,12 @@ ship-proxy-system/
         └── test_proxy_server.py
 ```
 
-## Building Docker Images
+
+## Building Docker Images (Manual)
 
 ```bash
 docker build -t yourname/ship-proxy-client ./client
 docker build -t yourname/ship-proxy-server ./server
-```
-
-## Running with Docker Compose
-
-```bash
-docker-compose up --build
 ```
 
 ## Running Manually
@@ -62,9 +57,40 @@ docker-compose up --build
    docker run -d --name ship-proxy-client -p 8080:8080 --link ship-proxy-server yourname/ship-proxy-client
    ```
 
+## Running with Docker Compose
+
+```bash
+docker-compose up --build
+```
+
 ## Testing
 
 - **HTTP**: `curl -x http://localhost:8080 http://httpforever.com/`
 - **HTTPS**: `curl -x http://localhost:8080 https://httpforever.com/ -k`
-- **Browser**: Configure proxy to `localhost:8080`.
+- **Browser**: Configure proxy to `localhost:8080`
+
+## Troubleshooting
+
+- To remove conflicting containers:
+  ```bash
+  docker rm -f ship-proxy-client ship-proxy-server
+  ```
+- To remove just one conflicting container:
+  ```bash
+  docker rm -f ship-proxy-client
+  docker rm -f ship-proxy-server
+  ```
+- To verify running containers:
+  ```bash
+  docker ps
+  ```
+- To check all containers (including stopped ones):
+  ```bash
+  docker ps -a
+  ```
+- If Docker engine is not running:
+  - Open Docker Desktop and start the Docker engine manually.
+
+---
+Happy shipping! 😾🛳️
 
